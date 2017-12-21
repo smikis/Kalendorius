@@ -2,11 +2,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
       xmlns:local="http://schemas.android.com/apk/res-auto">
   <item
-    android:id="@+id/problemMenu"
+    android:id="@+id/kalendoriusMenu"
     local:showAsAction="never"
     android:title="Kalendorius" />
   <item
-    android:id="@+id/usersMenu"
+    android:id="@+id/srautaiMenu"
     local:showAsAction="never"
     android:title="Srautai" />
   <item

@@ -12,8 +12,8 @@ using Android.Widget;
 
 namespace Kalendorius.Activities
 {
-    [Activity(Label = "ViewDay")]
-    public class ViewDay : Activity
+    [Activity(Label = "SourcesActivity")]
+    public class SourcesActivity : Activity
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {

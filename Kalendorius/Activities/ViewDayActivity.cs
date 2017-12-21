@@ -1,47 +1,51 @@
-﻿using System.Collections.Generic;
-using Java.Util;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
 using Android.App;
 using Android.Content;
 using Android.OS;
+using Android.Runtime;
 using Android.Support.V7.App;
 using Android.Support.V7.Widget;
 using Android.Views;
-using MV = Com.Applandeo.Materialcalendarview;
+using Android.Widget;
+using Kalendorius.Adapters;
+using Kalendorius.Models;
+using Toolbar = Android.Support.V7.Widget.Toolbar;
 
 namespace Kalendorius.Activities
 {
-    [Activity(Label = "HomeActivity", MainLauncher = true)]
-    public class HomeActivity : AppCompatActivity
+    [Activity(Label = "ViewDay")]
+    public class ViewDayActivity : AppCompatActivity
     {
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-            SetContentView(Resource.Layout.Home);
+            SetContentView(Resource.Layout.ViewDay);
+
+            var time =  Intent.GetStringExtra("DATE");
 
             // Adding Toolbar to Main screen           
             Toolbar toolbar = FindViewById<Toolbar>(Resource.Id.toolbar);
-            toolbar.Title = "Kalendorius";
+            toolbar.Title = time;
             SetSupportActionBar(toolbar);
 
-
-            MV.CalendarView calendarView = (MV.CalendarView)FindViewById(Resource.Id.calendarView);
-
-            List<MV.EventDay> events = new List<MV.EventDay>();
-
-            Calendar calendarToday = Calendar.Instance;
-            events.Add(new MV.EventDay(calendarToday, Resource.Drawable.sample_icon_1));
-            calendarView.SetEvents(events);
-
-
-            calendarView.DayClick += CalendarView_DayClick;
+           RecyclerView recyclerView = FindViewById<RecyclerView>(Resource.Id.recycler_view);
+            DayEventsAdapter adapter = new DayEventsAdapter(new List<DayEvent>());
+            adapter.ItemClick += Adapter_ItemClick; ;
+            recyclerView.SetAdapter(adapter);
+            recyclerView.HasFixedSize = true;
+            recyclerView.SetLayoutManager(new LinearLayoutManager(ApplicationContext));
 
         }
 
-        private void CalendarView_DayClick(object sender, MV.Listeners.DayClickEventArgs e)
+        private void Adapter_ItemClick(object sender, DayEvent e)
         {
-            Intent i = new Intent(ApplicationContext, typeof(ViewDayActivity));
-            var val = e.P0.Calendar.Time.ToString();
-            i.PutExtra("DATE", e.P0.Calendar.Time.ToString());
+            Intent i = new Intent(ApplicationContext, typeof(ViewEvent));
+            i.PutExtra("ID", e.Id);
             StartActivity(i);
         }
 
@@ -65,7 +69,7 @@ namespace Kalendorius.Activities
                     //do something
                     return true;
                 case Resource.Id.logoutMenu:
-                    
+
                     return true;
             }
             return base.OnOptionsItemSelected(item);
