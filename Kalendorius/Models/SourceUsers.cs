@@ -12,11 +12,9 @@ using Android.Widget;
 
 namespace Kalendorius.Models
 {
-    public class Source
+    public class SourceUsers
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public int User { get; set; }
-        public string Description { get; set; }
+        public int SourceId { get; set; }
+        public int UserId { get; set; }
     }
 }

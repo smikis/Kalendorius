@@ -122,6 +122,9 @@
     <Compile Include="Fragments\SubscribedSourcesFragment.cs" />
     <Compile Include="Models\DayEvent.cs" />
     <Compile Include="Models\Source.cs" />
+    <Compile Include="Models\SourceEvent.cs" />
+    <Compile Include="Models\SourceUsers.cs" />
+    <Compile Include="Models\User.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
