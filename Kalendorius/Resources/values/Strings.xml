@@ -1,4 +1,26 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="app_name">Kalendorius</string>
+    <string name="material_calendar_monday">P</string>
+    <string name="material_calendar_tuesday">A</string>
+    <string name="material_calendar_wednesday">T</string>
+    <string name="material_calendar_thursday">K</string>
+    <string name="material_calendar_friday">P</string>
+    <string name="material_calendar_saturday">Š</string>
+    <string name="material_calendar_sunday">S</string>
+
+    <array name="material_calendar_months_array">
+        <item>Sausis</item>
+        <item>Vasaris</item>
+        <item>Kovas</item>
+        <item>Balandis</item>
+        <item>Gegužė</item>
+        <item>Birželis</item>
+        <item>Liepa</item>
+        <item>Rugpjūtis</item>
+        <item>Rugsėjis</item>
+        <item>Spalis</item>
+        <item>Lapkritis</item>
+        <item>Geuodis</item>
+    </array>
+
 </resources>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:local="http://schemas.android.com/apk/res-auto">
+  <item
+    android:id="@+id/problemMenu"
+    local:showAsAction="never"
+    android:title="Kalendorius" />
+  <item
+    android:id="@+id/usersMenu"
+    local:showAsAction="never"
+    android:title="Srautai" />
+  <item
+    android:id="@+id/settingsMenu"
+    local:showAsAction="never"
+    android:title="Nustatymai" />
+  <item
+    android:id="@+id/logoutMenu"
+    local:showAsAction="never"
+    android:title="Atsijungti" />
+</menu>
