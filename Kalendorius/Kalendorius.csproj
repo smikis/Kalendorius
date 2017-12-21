@@ -113,8 +113,15 @@
     <Compile Include="Activities\ViewDayActivity.cs" />
     <Compile Include="Activities\ViewEvent.cs" />
     <Compile Include="Adapters\DayEventsAdapter.cs" />
+    <Compile Include="Adapters\SourcesAdapter.cs" />
     <Compile Include="Adapters\TableAdapter.cs" />
+    <Compile Include="Database\Cache.cs" />
+    <Compile Include="Database\DatabaseService.cs" />
+    <Compile Include="Fragments\AllSourcesFragment.cs" />
+    <Compile Include="Fragments\CreatedSourcesFragment.cs" />
+    <Compile Include="Fragments\SubscribedSourcesFragment.cs" />
     <Compile Include="Models\DayEvent.cs" />
+    <Compile Include="Models\Source.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -139,6 +146,15 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\ViewEvent.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\Sources.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\fragmentsRecyclerView.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\ListSources.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>
@@ -201,6 +217,9 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\teorija.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\ic_add.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Android.Support.Compat.25.4.0.2\build\MonoAndroid70\Xamarin.Android.Support.Compat.targets" Condition="Exists('..\packages\Xamarin.Android.Support.Compat.25.4.0.2\build\MonoAndroid70\Xamarin.Android.Support.Compat.targets')" />

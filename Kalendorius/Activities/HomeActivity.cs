@@ -55,11 +55,10 @@ namespace Kalendorius.Activities
         {
             switch (item.ItemId)
             {
-                case Resource.Id.kalendoriusMenu:
-                    //do something
+                case Resource.Id.kalendoriusMenu:                  
                     return true;
                 case Resource.Id.srautaiMenu:
-                    //do something
+                    StartActivity(typeof(SourcesActivity));
                     return true;
                 case Resource.Id.settingsMenu:
                     //do something
