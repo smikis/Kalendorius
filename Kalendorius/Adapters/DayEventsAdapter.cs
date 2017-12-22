@@ -83,7 +83,7 @@ namespace Kalendorius.Adapters
             
             vh.Category.Text = _events[position].Category;
             vh.Title.Text = _events[position].Title;
-            vh.Time.Text = _events[position].Time.ToString();
+            vh.Time.Text = _events[position].Time.ToString("HH:mm");
         }
 
         public override int ItemCount => _events.Count;

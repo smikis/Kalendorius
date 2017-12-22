@@ -37,11 +37,11 @@ namespace Kalendorius.Fragments
             return recyclerView;
         }
 
-        private void Adapter_ItemClick(object sender, Source e)
+        private void Adapter_ItemClick(object send, Source ex)
         {
-            /*  Intent i = new Intent(ApplicationContext, typeof(ViewEvent));
-              i.PutExtra("ID", e.Id);
-              StartActivity(i); */
+       
+
         }
+
     }
 }

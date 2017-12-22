@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using Android.Content;
 using Android.OS;
+using Android.Support.V7.App;
 using Android.Support.V7.Widget;
 using Android.Views;
 using Kalendorius.Adapters;
@@ -12,6 +14,7 @@ namespace Kalendorius.Fragments
     public class SubscribedSourcesFragment : Fragment
     {
         private DatabaseService _databaseService;
+        private int _dialogClickId;
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             _databaseService = new DatabaseService();
@@ -28,11 +31,28 @@ namespace Kalendorius.Fragments
             return recyclerView;
         }
 
-        private void Adapter_ItemClick(object sender, Source e)
+        private void Adapter_ItemClick(object send, Source ex)
         {
-            /*  Intent i = new Intent(ApplicationContext, typeof(ViewEvent));
-              i.PutExtra("ID", e.Id);
-              StartActivity(i); */
+            _dialogClickId = ex.Id;
+            using (var builder = new AlertDialog.Builder(Activity))
+            {
+                var title = "Do you wish to unsubscribe from this source?";
+                builder.SetTitle(title);
+                builder.SetPositiveButton("Yes", OkAction);
+                builder.SetNegativeButton("No", CancelAction);
+                var myCustomDialog = builder.Create();
+                myCustomDialog.Show();
+            }
+
+        }
+
+        private void OkAction(object sender, DialogClickEventArgs e)
+        {
+            _databaseService.UnsubscribeUserFromSource(_dialogClickId);
+        }
+        private void CancelAction(object sender, DialogClickEventArgs e)
+        {
+
         }
     }
 }
