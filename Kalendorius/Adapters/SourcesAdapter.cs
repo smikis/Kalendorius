@@ -22,24 +22,7 @@ namespace Kalendorius.Adapters
         public SourcesAdapter(List<Source> sources)
         {
             //_events = events;
-            _sources = new List<Source>();
-            _sources.Add(new Source
-            {
-                Name = "Egzaminas",
-                User = "18:00"
-            });
-
-            _sources.Add(new Source
-            {
-                Name = "Teorija",
-                User = "08:00",
-            });
-
-            _sources.Add(new Source
-            {
-                Name = "Praktika",
-                User = "19:00"
-            });
+            _sources = sources;
         }
 
         public override RecyclerView.ViewHolder

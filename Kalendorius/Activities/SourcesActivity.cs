@@ -20,7 +20,7 @@ namespace Kalendorius.Activities
            
              // Adding Toolbar to Main screen           
             Toolbar toolbar = FindViewById<Toolbar>(Resource.Id.toolbar);
-            toolbar.Title = "Problemos";
+            toolbar.Title = "Srautai";
             SetSupportActionBar(toolbar);
             TabLayout tabs = FindViewById<TabLayout>(Resource.Id.tabs);
 
@@ -41,7 +41,7 @@ namespace Kalendorius.Activities
 
         private void Fab_Click(object sender, System.EventArgs e)
         {
-          //  StartActivity(typeof(CreateProblemActivity));
+            StartActivity(typeof(CreateSource));
         }
 
     }

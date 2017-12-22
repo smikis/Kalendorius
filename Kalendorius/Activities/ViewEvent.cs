@@ -42,7 +42,7 @@ namespace Kalendorius.Activities
             var dayEvent = new DayEvent
             {
                 Category = "Exam",
-                Time = "2017-16-16 15:15",
+                Time = DateTime.Now,
                 Title = "Informatikos egzaminas",
                 Location = "Studentu g. 67",
                 Description = "Galima naudotis kompiuteriu"
@@ -50,12 +50,12 @@ namespace Kalendorius.Activities
             _categoryField.Text = dayEvent.Category;
             _titleField.Text = dayEvent.Title;
             _locationField.Text = dayEvent.Location;
-            _dateField.Text = dayEvent.Time;
+            _dateField.Text = dayEvent.Time.ToString();
             _descriptionField.Text = dayEvent.Description;
 
             // Adding Toolbar to Main screen           
             Toolbar toolbar = FindViewById<Toolbar>(Resource.Id.toolbar);
-            toolbar.Title = dayEvent.Time;
+            toolbar.Title = dayEvent.ToString();
             SetSupportActionBar(toolbar);
 
         }

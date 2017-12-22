@@ -26,28 +26,28 @@ namespace Kalendorius.Adapters
             _events.Add(new DayEvent
             {
                 Category = "Egzaminas",
-                Time = "18:00",
+                Time = DateTime.Now,
                 Title = "Ekonomikos egzaminas"
             });
 
             _events.Add(new DayEvent
             {
                 Category = "Teorija",
-                Time = "08:00",
+                Time = DateTime.Now,
                 Title = "Ekonomikos teorija"
             });
 
             _events.Add(new DayEvent
             {
                 Category = "Praktika",
-                Time = "19:00",
+                Time = DateTime.Now,
                 Title = "Ekonomikos teorija"
             });
 
             _events.Add(new DayEvent
             {
                 Category = "Laboratoriniai",
-                Time = "22:00",
+                Time = DateTime.Now,
                 Title = "Ekonomikos teorija"
             });
         }
@@ -83,7 +83,7 @@ namespace Kalendorius.Adapters
             
             vh.Category.Text = _events[position].Category;
             vh.Title.Text = _events[position].Title;
-            vh.Time.Text = _events[position].Time;
+            vh.Time.Text = _events[position].Time.ToString();
         }
 
         public override int ItemCount => _events.Count;
