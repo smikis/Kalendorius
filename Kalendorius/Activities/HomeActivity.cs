@@ -6,6 +6,7 @@ using Android.OS;
 using Android.Support.V7.App;
 using Android.Support.V7.Widget;
 using Android.Views;
+using Kalendorius.Database;
 using MV = Com.Applandeo.Materialcalendarview;
 
 namespace Kalendorius.Activities
@@ -13,8 +14,10 @@ namespace Kalendorius.Activities
     [Activity(Label = "HomeActivity", MainLauncher = true)]
     public class HomeActivity : AppCompatActivity
     {
+        private DatabaseService _databaseService;
         protected override void OnCreate(Bundle savedInstanceState)
         {
+            _databaseService = new DatabaseService();
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.Home);
 
@@ -28,11 +31,31 @@ namespace Kalendorius.Activities
 
             List<MV.EventDay> events = new List<MV.EventDay>();
 
-            Calendar calendarToday = Calendar.Instance;
-            events.Add(new MV.EventDay(calendarToday, Resource.Drawable.sample_icon_1));
+            foreach (var dayEvent in _databaseService.GetUserEvents())
+            {
+                Calendar calendar = Calendar.Instance;
+                calendar.Set(dayEvent.Time.Year, dayEvent.Time.Month, dayEvent.Time.Day);
+                switch (dayEvent.Category)
+                {
+                    case "Egzaminas":
+                        events.Add(new MV.EventDay(calendar, Resource.Drawable.egzas));
+                        break;
+                    case "Teorija":
+                        events.Add(new MV.EventDay(calendar, Resource.Drawable.teorija));
+                        break;
+                    case "Testas":
+                        events.Add(new MV.EventDay(calendar, Resource.Drawable.laborai));
+                        break;
+                    case "Praktika":
+                        events.Add(new MV.EventDay(calendar, Resource.Drawable.laborai));
+                        break;
+                    case "Laboratoriniai":
+                        events.Add(new MV.EventDay(calendar, Resource.Drawable.laborai));
+                        break;
+                }
+            }
+
             calendarView.SetEvents(events);
-
-
             calendarView.DayClick += CalendarView_DayClick;
 
         }
