@@ -10,6 +10,7 @@ using Android.Runtime;
 using Android.Support.V7.App;
 using Android.Views;
 using Android.Widget;
+using Kalendorius.Database;
 using Kalendorius.Models;
 using Toolbar = Android.Support.V7.Widget.Toolbar;
 
@@ -25,13 +26,12 @@ namespace Kalendorius.Activities
         private TextView _descriptionField;
         private TextView _dateField;
 
+        private DatabaseService _databaseService;
         protected override void OnCreate(Bundle savedInstanceState)
         {
+            _databaseService = new DatabaseService();
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.ViewEvent);
-
-            
-
             _categoryField = FindViewById<TextView>(Resource.Id.categoryField);
             _titleField = FindViewById<TextView>(Resource.Id.titleField);
             _locationField = FindViewById<TextView>(Resource.Id.locationField);
@@ -39,14 +39,7 @@ namespace Kalendorius.Activities
             _descriptionField = FindViewById<TextView>(Resource.Id.descriptionField);
 
             _id = Intent.GetIntExtra("ID", 1);
-            var dayEvent = new DayEvent
-            {
-                Category = "Exam",
-                Time = DateTime.Now,
-                Title = "Informatikos egzaminas",
-                Location = "Studentu g. 67",
-                Description = "Galima naudotis kompiuteriu"
-            };
+            var dayEvent = _databaseService.GetEvent(_id);
             _categoryField.Text = dayEvent.Category;
             _titleField.Text = dayEvent.Title;
             _locationField.Text = dayEvent.Location;

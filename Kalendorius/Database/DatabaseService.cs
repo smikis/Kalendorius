@@ -130,6 +130,11 @@ namespace Kalendorius.Database
             return events.ToList();
         }
 
+        public DayEvent GetEvent(int id)
+        {
+            return Cache.Events.FirstOrDefault(x => x.Id == id);
+        }
+
         public List<DayEvent> GetUserEventsSpecificDay(DateTime time)
         {
             var user = 1;
