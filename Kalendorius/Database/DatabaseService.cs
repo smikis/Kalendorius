@@ -10,14 +10,18 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Kalendorius.Models;
+using Plugin.Settings;
+using Plugin.Settings.Abstractions;
 
 namespace Kalendorius.Database
 {
     public class DatabaseService
     {
+        private static ISettings AppSettings =>
+            CrossSettings.Current;
         public bool CreateSource(string name, string description)
         {
-            var user = 1;
+            var user = AppSettings.GetValueOrDefault("user", 1);
             int id = 0;
             if (Cache.Sources.Any())
             {
@@ -42,13 +46,13 @@ namespace Kalendorius.Database
 
         public List<Source> GetUserCreatedSources()
         {
-            var user = 1;
+            var user = AppSettings.GetValueOrDefault("user", 1);
             return Cache.Sources.Where(x => x.User == user).ToList();
         }
 
         public bool SubscribeUserToSource(int sourceId)
         {
-            var user = 1; 
+            var user = AppSettings.GetValueOrDefault("user", 1);
             Cache.SourceUsers.Add(new SourceUsers
             {
              UserId   = user,
@@ -59,14 +63,14 @@ namespace Kalendorius.Database
 
         public bool UnsubscribeUserFromSource(int sourceId)
         {
-            var user = 1;
+            var user = AppSettings.GetValueOrDefault("user", 1);
             Cache.SourceUsers.RemoveAll(x => x.SourceId == sourceId && x.UserId == user);
             return true;
         }
 
         public List<Source> GetUserSubscribedSources()
         {
-            var user = 1;
+            var user = AppSettings.GetValueOrDefault("user", 1);
             return Cache.Sources.Where(x => Cache.SourceUsers.Any(y=> y.UserId == user && y.SourceId == x.Id)).ToList();
         }
 
@@ -90,7 +94,6 @@ namespace Kalendorius.Database
 
         public bool CreateEvent(string title, string category, DateTime time, string description, string location, int sourceId)
         {
-            var user = 1;
             int id = 0;
             if (Cache.Events.Any())
             {
@@ -117,7 +120,7 @@ namespace Kalendorius.Database
 
         public List<DayEvent> GetUserEvents()
         {
-            var user = 1;
+            var user = AppSettings.GetValueOrDefault("user", 1);
             var userSubscriptions = Cache.SourceUsers.Where(x => x.UserId == user);
             var events = new List<DayEvent>();
             foreach (var userSubscription in userSubscriptions)
@@ -137,7 +140,7 @@ namespace Kalendorius.Database
 
         public List<DayEvent> GetUserEventsSpecificDay(DateTime time)
         {
-            var user = 1;
+            var user = AppSettings.GetValueOrDefault("user", 1);
             var userSubscriptions = Cache.SourceUsers.Where(x => x.UserId == user);
             var events = new List<DayEvent>();
             foreach (var userSubscription in userSubscriptions)
@@ -152,8 +155,14 @@ namespace Kalendorius.Database
 
         public bool Register(string name, string username, string password)
         {
+            int id = 0;
+            if (Cache.Events.Any())
+            {
+                id = Cache.Events.Max(x => x.Id) + 1;
+            }
             var user = new User
             {
+                Id = id,
                 Username = username,
                 Name = name,
                 Password = password
@@ -164,7 +173,13 @@ namespace Kalendorius.Database
 
         public bool Login(string username, string password)
         {
-            return Cache.Users.Any(x => x.Username == username && x.Password == password);
+            var user = Cache.Users.SingleOrDefault(x => x.Username == username && x.Password == password);
+            if (user != null)
+            {
+                AppSettings.AddOrUpdateValue("user", user.Id);
+                return true;
+            }
+            return false;
         }
 
     }

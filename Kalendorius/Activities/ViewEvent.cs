@@ -63,17 +63,20 @@ namespace Kalendorius.Activities
         {
             switch (item.ItemId)
             {
+                case Resource.Id.createEventMenu:
+                    StartActivity(typeof(CreateEvent));
+                    return true;
                 case Resource.Id.kalendoriusMenu:
-                    //do something
+                    StartActivity(typeof(HomeActivity));
                     return true;
                 case Resource.Id.srautaiMenu:
-                    //do something
+                    StartActivity(typeof(SourcesActivity));
                     return true;
                 case Resource.Id.settingsMenu:
                     //do something
                     return true;
                 case Resource.Id.logoutMenu:
-
+                    StartActivity(typeof(LoginActivity));
                     return true;
             }
             return base.OnOptionsItemSelected(item);

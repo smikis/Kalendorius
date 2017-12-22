@@ -67,7 +67,7 @@ namespace Kalendorius.Activities
                     //do something
                     return true;
                 case Resource.Id.logoutMenu:
-
+                    StartActivity(typeof(LoginActivity));
                     return true;
             }
             return base.OnOptionsItemSelected(item);

@@ -12,7 +12,7 @@ using MV = Com.Applandeo.Materialcalendarview;
 
 namespace Kalendorius.Activities
 {
-    [Activity(Label = "HomeActivity", MainLauncher = true)]
+    [Activity(Label = "HomeActivity")]
     public class HomeActivity : AppCompatActivity
     {
         private DatabaseService _databaseService;
@@ -92,7 +92,7 @@ namespace Kalendorius.Activities
                     //do something
                     return true;
                 case Resource.Id.logoutMenu:
-                    
+                    StartActivity(typeof(LoginActivity));
                     return true;
             }
             return base.OnOptionsItemSelected(item);
