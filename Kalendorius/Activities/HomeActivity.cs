@@ -41,7 +41,7 @@ namespace Kalendorius.Activities
         {
             Intent i = new Intent(ApplicationContext, typeof(ViewDayActivity));
             var val = e.P0.Calendar.Time.ToString();
-            i.PutExtra("DATE", e.P0.Calendar.Time.ToString());
+            i.PutExtra("DATE", e.P0.Calendar.Time.Time.ToString());
             StartActivity(i);
         }
 
@@ -55,7 +55,11 @@ namespace Kalendorius.Activities
         {
             switch (item.ItemId)
             {
-                case Resource.Id.kalendoriusMenu:                  
+                case Resource.Id.createEventMenu:
+                    StartActivity(typeof(CreateEvent));
+                    return true;
+                case Resource.Id.kalendoriusMenu:
+                    StartActivity(typeof(HomeActivity));
                     return true;
                 case Resource.Id.srautaiMenu:
                     StartActivity(typeof(SourcesActivity));

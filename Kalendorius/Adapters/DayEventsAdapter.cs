@@ -21,35 +21,7 @@ namespace Kalendorius.Adapters
 
         public DayEventsAdapter(List<DayEvent> events)
         {
-            //_events = events;
-            _events = new List<DayEvent>();
-            _events.Add(new DayEvent
-            {
-                Category = "Egzaminas",
-                Time = DateTime.Now,
-                Title = "Ekonomikos egzaminas"
-            });
-
-            _events.Add(new DayEvent
-            {
-                Category = "Teorija",
-                Time = DateTime.Now,
-                Title = "Ekonomikos teorija"
-            });
-
-            _events.Add(new DayEvent
-            {
-                Category = "Praktika",
-                Time = DateTime.Now,
-                Title = "Ekonomikos teorija"
-            });
-
-            _events.Add(new DayEvent
-            {
-                Category = "Laboratoriniai",
-                Time = DateTime.Now,
-                Title = "Ekonomikos teorija"
-            });
+            _events = events;     
         }
 
         public override RecyclerView.ViewHolder

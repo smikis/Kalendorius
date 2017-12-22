@@ -44,5 +44,34 @@ namespace Kalendorius.Activities
             StartActivity(typeof(CreateSource));
         }
 
+        public override bool OnCreateOptionsMenu(IMenu menu)
+        {
+            MenuInflater.Inflate(Resource.Layout.menu, menu);
+            return base.OnCreateOptionsMenu(menu);
+        }
+
+        public override bool OnOptionsItemSelected(IMenuItem item)
+        {
+            switch (item.ItemId)
+            {
+                case Resource.Id.createEventMenu:
+                    StartActivity(typeof(CreateEvent));
+                    return true;
+                case Resource.Id.kalendoriusMenu:
+                    StartActivity(typeof(HomeActivity));
+                    return true;
+                case Resource.Id.srautaiMenu:
+                    StartActivity(typeof(SourcesActivity));
+                    return true;
+                case Resource.Id.settingsMenu:
+                    //do something
+                    return true;
+                case Resource.Id.logoutMenu:
+
+                    return true;
+            }
+            return base.OnOptionsItemSelected(item);
+        }
+
     }
 }

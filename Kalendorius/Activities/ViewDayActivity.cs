@@ -12,6 +12,7 @@ using Android.Support.V7.Widget;
 using Android.Views;
 using Android.Widget;
 using Kalendorius.Adapters;
+using Kalendorius.Database;
 using Kalendorius.Models;
 using Toolbar = Android.Support.V7.Widget.Toolbar;
 
@@ -21,20 +22,24 @@ namespace Kalendorius.Activities
     public class ViewDayActivity : AppCompatActivity
     {
 
+        private DatabaseService _databaseService;
         protected override void OnCreate(Bundle savedInstanceState)
         {
+            _databaseService = new DatabaseService();
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.ViewDay);
 
-            var time =  Intent.GetStringExtra("DATE");
-
+            var ms =  Intent.GetStringExtra("DATE");
+            double ticks = double.Parse(ms);
+            TimeSpan time = TimeSpan.FromMilliseconds(ticks);
+            DateTime parsedTime = new DateTime(1970, 1, 1) + time;
             // Adding Toolbar to Main screen           
             Toolbar toolbar = FindViewById<Toolbar>(Resource.Id.toolbar);
-            toolbar.Title = time;
+            toolbar.Title = parsedTime.ToString("yyyy-MM-dd");
             SetSupportActionBar(toolbar);
 
            RecyclerView recyclerView = FindViewById<RecyclerView>(Resource.Id.recycler_view);
-            DayEventsAdapter adapter = new DayEventsAdapter(new List<DayEvent>());
+            DayEventsAdapter adapter = new DayEventsAdapter(_databaseService.GetUserEventsSpecificDay(parsedTime));
             adapter.ItemClick += Adapter_ItemClick; ;
             recyclerView.SetAdapter(adapter);
             recyclerView.HasFixedSize = true;
@@ -59,11 +64,14 @@ namespace Kalendorius.Activities
         {
             switch (item.ItemId)
             {
+                case Resource.Id.createEventMenu:
+                    StartActivity(typeof(CreateEvent));
+                    return true;
                 case Resource.Id.kalendoriusMenu:
-                    //do something
+                    StartActivity(typeof(HomeActivity));
                     return true;
                 case Resource.Id.srautaiMenu:
-                    //do something
+                    StartActivity(typeof(SourcesActivity));
                     return true;
                 case Resource.Id.settingsMenu:
                     //do something

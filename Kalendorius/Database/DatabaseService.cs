@@ -75,11 +75,24 @@ namespace Kalendorius.Database
             return Cache.Sources.ToList();
         }
 
+        public bool CreateEvents(string title, string category, DateTime time, string description, string location,
+            int sourceId, DateTime fromDate, DateTime toDate, int interval)
+        {
+            while (fromDate < toDate)
+            {
+                var eventTime = fromDate.AddHours(time.Hour);
+                eventTime = eventTime.AddMinutes(time.Minute);
+                CreateEvent(title, category, eventTime, description, location, sourceId);
+                fromDate = fromDate.AddDays(interval);
+            }
+            return true;
+        }
+
         public bool CreateEvent(string title, string category, DateTime time, string description, string location, int sourceId)
         {
             var user = 1;
             int id = 0;
-            if (Cache.Sources.Any())
+            if (Cache.Events.Any())
             {
                 id = Cache.Events.Max(x => x.Id) + 1;
             }
@@ -113,6 +126,21 @@ namespace Kalendorius.Database
                     Cache.SourceEvents.Any(y => y.SourceId == userSubscription.SourceId && y.EventId == x.Id));
                 events.AddRange(sourceEvents);
                 
+            }
+            return events.ToList();
+        }
+
+        public List<DayEvent> GetUserEventsSpecificDay(DateTime time)
+        {
+            var user = 1;
+            var userSubscriptions = Cache.SourceUsers.Where(x => x.UserId == user);
+            var events = new List<DayEvent>();
+            foreach (var userSubscription in userSubscriptions)
+            {
+                var sourceEvents = Cache.Events.Where(x =>
+                    Cache.SourceEvents.Any(y => y.SourceId == userSubscription.SourceId && y.EventId == x.Id)).Where(x=> x.Time.Year == time.Year && x.Time.Month == time.Month && x.Time.Day == time.Day);
+                events.AddRange(sourceEvents);
+
             }
             return events.ToList();
         }

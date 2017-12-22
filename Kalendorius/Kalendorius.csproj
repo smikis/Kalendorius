@@ -108,6 +108,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Activities\CreateEvent.cs" />
     <Compile Include="Activities\CreateSource.cs" />
     <Compile Include="Activities\HomeActivity.cs" />
     <Compile Include="Activities\SourcesActivity.cs" />
@@ -162,6 +163,9 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\CreateSource.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\CreateEvent.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>
