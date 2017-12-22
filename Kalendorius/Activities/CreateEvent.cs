@@ -28,6 +28,7 @@ namespace Kalendorius.Activities
         private EditText _selectToDate;
         private TextView _selectToDateLabel;
         private EditText _repeat;
+        private TextView _repeatLabel;
         private EditText _time;
         private EditText _description;
         private Button _createButton;
@@ -53,6 +54,7 @@ namespace Kalendorius.Activities
             _selectToDate = FindViewById<EditText>(Resource.Id.selectToDate);
             _selectToDateLabel = FindViewById<TextView>(Resource.Id.selectToLabel);
             _repeat = FindViewById<EditText>(Resource.Id.selectRepeat);
+            _repeatLabel = FindViewById<TextView>(Resource.Id.selectRepeaLabel);
             _time = FindViewById<EditText>(Resource.Id.selectTime);
             _description = FindViewById<EditText>(Resource.Id.descriptionField);
             _selectSingle = FindViewById<CheckBox>(Resource.Id.selectSingle);
@@ -83,9 +85,13 @@ namespace Kalendorius.Activities
                     _description.Text, _locationField.Text, _sources[sourceId].Id);
                 StartActivity(typeof(HomeActivity));
             }
-            _databaseService.CreateEvents(_titleField.Text, _categoryField.SelectedItem.ToString(), _selectedTime,
-                _description.Text, _locationField.Text, _sources[sourceId].Id, _selectedFromDateTime,
-                _selectedToDateTime, int.Parse(_repeat.Text));
+            else
+            {
+                _databaseService.CreateEvents(_titleField.Text, _categoryField.SelectedItem.ToString(), _selectedTime,
+                    _description.Text, _locationField.Text, _sources[sourceId].Id, _selectedFromDateTime,
+                    _selectedToDateTime, int.Parse(_repeat.Text));
+            }
+          
             StartActivity(typeof(HomeActivity));
         }
 
@@ -127,11 +133,15 @@ namespace Kalendorius.Activities
             {
                 _selectToDate.Visibility = ViewStates.Gone;
                 _selectToDateLabel.Visibility = ViewStates.Gone;
+                _repeat.Visibility = ViewStates.Gone;
+                _repeatLabel.Visibility = ViewStates.Gone;
             }
             else
             {
                 _selectToDate.Visibility = ViewStates.Visible;
                 _selectToDateLabel.Visibility = ViewStates.Visible;
+                _repeat.Visibility = ViewStates.Visible;
+                _repeatLabel.Visibility = ViewStates.Visible;
             }
         }
     }

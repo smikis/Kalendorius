@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Java.Util;
 using Android.App;
 using Android.Content;
@@ -34,7 +35,7 @@ namespace Kalendorius.Activities
             foreach (var dayEvent in _databaseService.GetUserEvents())
             {
                 Calendar calendar = Calendar.Instance;
-                calendar.Set(dayEvent.Time.Year, dayEvent.Time.Month, dayEvent.Time.Day);
+                calendar.Set(dayEvent.Time.Year, dayEvent.Time.Month-1, dayEvent.Time.Day);
                 switch (dayEvent.Category)
                 {
                     case "Egzaminas":
@@ -63,8 +64,8 @@ namespace Kalendorius.Activities
         private void CalendarView_DayClick(object sender, MV.Listeners.DayClickEventArgs e)
         {
             Intent i = new Intent(ApplicationContext, typeof(ViewDayActivity));
-            var val = e.P0.Calendar.Time.ToString();
-            i.PutExtra("DATE", e.P0.Calendar.Time.Time.ToString());
+            var date = new DateTime(1900 + e.P0.Calendar.Time.Year, e.P0.Calendar.Time.Month+1, e.P0.Calendar.Time.GetDate());
+            i.PutExtra("DATE", date.ToString());
             StartActivity(i);
         }
 

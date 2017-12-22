@@ -30,9 +30,7 @@ namespace Kalendorius.Activities
             SetContentView(Resource.Layout.ViewDay);
 
             var ms =  Intent.GetStringExtra("DATE");
-            double ticks = double.Parse(ms);
-            TimeSpan time = TimeSpan.FromMilliseconds(ticks);
-            DateTime parsedTime = new DateTime(1970, 1, 1) + time;
+            DateTime parsedTime = DateTime.Parse(ms);
             // Adding Toolbar to Main screen           
             Toolbar toolbar = FindViewById<Toolbar>(Resource.Id.toolbar);
             toolbar.Title = parsedTime.ToString("yyyy-MM-dd");
